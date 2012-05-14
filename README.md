@@ -1,7 +1,12 @@
 backbone.configurator
 =====================
 
-Move hardcoded strings and other dependancies out of your Backbone.js classes.
+Backbone.Configurator (Backbone.Config) is an extensible object-class that allows you to extract any and all hardcoded string dependancies from your Backbone classes and
+manage them in a hierarchical object wrapped with the usual getter and setter functions, plus Backbone.Events, plus more.  The best analogy is with Backbone.Collection.
+You use aa Collection object to manage a list of Model instances.  You use Backbone.Config to manage an object hierarchy that consists of all your application's config
+information organized however you see fit.  
+
+## Benefits
 
 /* Copywrite 2012, David Shapiro - portions added to existing Backbone code*/
 
