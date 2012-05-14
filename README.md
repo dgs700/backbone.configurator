@@ -4,30 +4,27 @@ backbone.configurator
 Backbone.Configurator (Backbone.Config) is an extensible object-class that allows you to extract any and all hardcoded string dependancies from your Backbone classes and
 manage them in a hierarchical object wrapped with the usual getter and setter functions, plus Backbone.Events, plus more.  The best analogy is with Backbone.Collection.
 You use aa Collection object to manage a list of Model instances.  You use Backbone.Config to manage an object hierarchy that consists of all your application's config
-information organized however you see fit.  
+information organized however you see fit.
 
 ## Benefits
+
+* Maintain Backbone MVC classes free of hardcoded dependancies including strings, css, text, html fragments, routes, mappings, jQuery selectors, class names. 
+* Application configurations can be extended, instantiated, modified or reset at runtime. Instantiate your config object and inject into your app.
+* Prototype inheritance, and object instantiation is the same style as Backbone.js except for the managed Config object which is not overridden, but 
+jQuery deep-extended along the inheritance chain allowing for cascading configurations.
+* Modify configurations and trigger config:changed events during runtime to dynamically decorate your app. Your other Backbone objects (views, models, routers)
+can listen for config events and react accordingly.
+* Ideal for situations where your Backbone views (controllers) and routers need the flexibility to handle different templating and rendering situations
+depending on different display contexts.
+* You can override the utility functions (or add to) with those more suited to your needs. As with the rest of Backbone, the functionality is the minimal necessary.
+* A suggested, skeletal config object is included which you can extend or overwrite with your own.
+
+
 
 /* Copywrite 2012, David Shapiro - portions added to existing Backbone code*/
 
 /* Subject to FFRUYL licensing - Feel free to rip and use as you like. */
 
-/*globals Backbone:true, _:true, $:true*/
-
-// @name: Configurator
-//
-// @tagline: Configurator for Backbone Apps- models, views and routers
-//
-// @description:
-// Experimental code
-// -Maintain Backbone MVC classes free of hardcoded dependancies including strings, css, text, and html fragments.
-// -Create and modify application configuration object and inject into app bootstrap.
-// -Modify configurations and trigger config:changed events during runtime to dynamically decorate your app.
-// -View and Model classes can react to config events the same way views can react to data events
-// -Configurator classes and config objects can be subclassed or mixed into to 
-// -Class and inheritance structure follows the same conventions used in core Backbone modules EXCEPT
-// for the wrapped config objects which follow more of a CSS type of property application from more general 
-// to more specific
 
 Backbone.Configurator = (function (Backbone, _, $) {
     "use strict";
