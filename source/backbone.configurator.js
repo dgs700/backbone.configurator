@@ -1,7 +1,5 @@
 /* Copywrite 2012, David Shapiro - portions added to existing Backbone code*/
 
-/* Subject to FFRUYL licensing - Feel free to rip and use as you like. */
-
 /*globals Backbone:true, _:true, $:true*/
 
 // @name: Configurator
@@ -99,6 +97,7 @@ Backbone.Config = (function (Backbone, _, $) {
     };
     
     // constructor
+    // set options.fresh = true to disclude the config object above
     Configurator = function(props, options) {
         options = options || {};
         var fresh = options.fresh || false;
@@ -142,18 +141,30 @@ Backbone.Config = (function (Backbone, _, $) {
         // override for different or additional fucntionality
         // returns false if no match
         // for the whole config obj use getConfig()
-        get: function(key){
-            if(key === '') // should this just be falsy??
-                return this.config;
-            else if(this.config.hasOwnProperty(key))
-                return this.config[key];
+        // set wrap to true to return the object wrapped in a Config obj
+        get: function(key, wrap){
+            var obj = null;
+            if(this.config.hasOwnProperty(key))
+                obj = this.config[key];
+            else if(key === '') // should this just be falsy??
+                obj = this.config;
             else{
-                for(var obj in this.config){
-                    if(this.config[obj].hasOwnProperty(key))
-                        return this.config[obj][key];
+                for(var o in this.config){
+                    if(this.config[o].hasOwnProperty(key)){
+                        obj = this.config[o][key];
+                        break;
+                    }
                 }
             }
-            return false;
+            if(obj && wrap){
+                return new Configurator(obj, {fresh:true});
+            }else{
+                return (obj) ? obj : false;
+            }
+        },
+        
+        has: function(key){
+            
         },
         // return new fully cooked config obj
         getConfig: function(key){
@@ -191,6 +202,8 @@ Backbone.Config = (function (Backbone, _, $) {
     
     // The self-propagating extend function that Backbone classes use.
     // Added  configProps to for deep copying
+    // Note*** - if any config keys reference other objects or classes, they need to be loaded
+    // and referencable prior to this constructor call
     Configurator.extend = function(configProps, protoProps, classProps) {
         var child = inherits(this, configProps, protoProps, classProps);
         child.extend = this.extend;
@@ -231,7 +244,11 @@ Backbone.Config = (function (Backbone, _, $) {
 
         // Add deep copy of config properties (instance properties) to the subclass,
         // if supplied since we don't want to copy any nested references.
-        if (configProps) $.extend(true, child.config, configProps);
+        if (configProps){
+            //console.log('added: ', configProps);
+            $.extend(true, child.config, configProps);
+            //console.log(child.config);
+        }
         
         // Add prototype properties (instance properties) to the subclass,
         // if supplied.
