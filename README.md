@@ -13,7 +13,7 @@ mixed in.
 
 If your Backbone classes need the flexibility to handle more than one presentation context, your should be using something to abstract and manage the context dependancies.
 Afterall, embedded string dependancies in your Backbone.js code such as templateId:"theIDinMyHTML" or className:"cssClassString"
-is tantamount to embedding inline event handlers in you html: <a onclick="alert('clicked');return false">
+is tantamount to embedding inline event handlers in your html: <a onclick="alert('clicked');return false">
 
 ## Benefits
 
