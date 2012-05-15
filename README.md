@@ -1,6 +1,8 @@
 backbone.configurator
 =====================
 
+/* (C) 2012, David Shapiro - portions added to existing Backbone code */
+
 Backbone.Configurator (Backbone.Config) is an extensible object-class that allows you to extract any and all hardcoded string dependancies from your Backbone classes and
 manage them in a hierarchical object wrapped with the usual getter and setter functions, plus Backbone.Events, plus more.  The best analogy is with Backbone.Collection.
 You use a Collection object to manage a list of Model instances.  You use Backbone.Config to manage an object hierarchy that consists of all your application's config
@@ -23,11 +25,60 @@ depending on different display contexts.
 * You can override the utility functions (or add to) with those more suited to your needs. As with the rest of Backbone, the functionality is the minimal necessary.
 * A suggested, skeletal config object is included which you can extend or overwrite with your own.
 
-## API docs beyond my lovely annotated source code coming soon, but really all there is is Config.extend(), config.set(), config.get().
+## API docs beyond my lovely annotated source code coming soon, but really all there is is Config.extend(), config.set(), config.get(). ##
 
+Config.extend({settings}, {protoProps, {classProps})
+ - subclass a Config with optional settings object included before the usual Backbone.extend options
 
+    var SubConfig = Config.extend({
+        test:{
+            foo:'bar'
+        }
+    });
 
-/* (C) 2012, David Shapiro - portions added to existing Backbone code*/
+new Config({settings}, {options:{fresh:true|false}})
+ - instantiate a new config instance with optional settings object listed before the Backbone options object. 
+Include {fresh:true} in the options to disclude any inherited config settings.
+
+    var myConf = new SubConfig({
+        test:{
+            bar:'baz'
+        }
+    })
+
+    myConf.config = {
+        test:{
+            foo:'bar',
+            bar:'baz'
+        }
+    }
+
+.get('prop', [true])
+ - return the value for a property string. This implementation does a breadth search of the first 2 levels only for minimalist performance 
+reasons. Including true as the second arg will wrap the returned value in a new Config instance. This can be overridden for more complex searching, hashing, 
+flattening, etc. 
+
+    myConf.get('foo') // 'bar'
+    
+    myConf.get('test', true).get('bar') // 'baz'
+
+.set({settings}, [loud:true], 'event_string']]) - deep copies new settings into the Config instance. If loud:true, a generic change:config event is triggered. 
+An optional custom event string can be passed in.   Other Backbone objects can bind listeners in the usual way.
+
+   myConf.set({
+        test:{
+            another:{propHash}
+        }
+    })
+
+    myConf.get('test') // {
+                            foo:'bar',
+                            bar:'baz',
+                            another:{propHash}
+                          }
+
+.has('property')
+ - determine if property exists 
 
 Backbone.Configurator = (function (Backbone, _, $) {
     "use strict";
