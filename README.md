@@ -3,13 +3,17 @@ backbone.configurator
 
 /* (C) 2012, David Shapiro - portions added to existing Backbone code */
 
-Backbone.Configurator (Backbone.Config) is an extensible object-class that allows you to extract any and all hardcoded string dependancies from your Backbone classes and
+Backbone.Configurator (Backbone.Config) is an extensible object-class that allows you to manage your Backbone.js configuration(s) by moving any and all hardcoded string dependancies from your Backbone classes and
 manage them in a hierarchical object wrapped with the usual getter and setter functions, plus Backbone.Events, plus more.  The best analogy is with Backbone.Collection.
 You use a Collection object to manage a list of Model instances.  You use Backbone.Config to manage an object hierarchy that consists of all your application's config
 information organized however you see fit.  The ideal use-case is in any situation where your Backbone object-classes need the flexibility to go beyond a single page app
-and mutate to handle different presentation contexts, data sets, etc.
+and mutate to handle different presentation contexts, data sets, etc. It is designed to have the minimalist functionality
+of typical configuration classes seen in server-side MVC frameworks with Backbone.Events and Backbone inheritance style
+mixed in.
 
 If your Backbone classes need the flexibility to handle more than one presentation context, your should be using something to abstract and manage the context dependancies.
+Afterall, embedded string dependancies in your Backbone.js code such as templateId:"theIDinMyHTML" or className:"cssClassString"
+is tantamount to embedding inline event handlers in you html: <a onclick="alert('clicked');return false">
 
 ## Benefits
 
