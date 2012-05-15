@@ -16,7 +16,7 @@ If your Backbone classes need the flexibility to handle more than one presentati
 * Maintain Backbone MVC classes free of hardcoded dependancies including strings, css, text, html fragments, routes, mappings, urls, jQuery selectors, class names, switches, 
 default data attributes, etc. 
 * Application configurations can be extended, instantiated, modified or reset at runtime. Instantiate your config object and inject into your app.
-* Prototype inheritance, and object instantiation is the same style as Backbone.js except for the managed Config object which is not overridden, but 
+* Prototype inheritance, and object instantiation is the same style as Backbone.js except for the managed Config object which is not overridden, but  
 jQuery deep-extended along the inheritance chain allowing for cascading configurations.
 * Modify configurations and trigger config:changed events during runtime to dynamically decorate your app. Your other Backbone objects (views, models, routers)
 can listen for config events and react accordingly. I.E. View.on(config:change, @render) -> Config.set({templateId:'#newTemplate'}) -> triggers config:change
