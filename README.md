@@ -83,16 +83,14 @@ An optional custom event string can be passed in.   Other Backbone objects can b
                           }
 
 **.has('property')**
-determine if property exists 
+determine if property exists (not yet implemented)
 
     myApp = new Backbone.Router(myConf);
 
-    //sample, suggested skeletal configuration for basic Backbone modules
-    //the idea is to use this as a filing system for dependancies in whatever logical
-    //groupings make sense for your site
-    //you can extend this object or set your own via
-    //Backbone.Configurator.config = {your base config} prior to extending your own
-    //Configurator classes
+Sample, suggested skeletal configuration for basic Backbone modules. The idea is to use this as a filing system for dependancies
+in whatever logical groupings make sense for your site.
+You can extend this object or set your own via Backbone.Configurator.config = {your base config} prior to extending your own
+Configurator classes.
     
     config = {
         //
@@ -158,3 +156,5 @@ determine if property exists
     };
     
     Configurator.config = config;
+
+** Example usage coming soon
