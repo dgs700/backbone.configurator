@@ -157,4 +157,4 @@ Configurator classes.
     
     Configurator.config = config;
 
-** Example usage coming soon
+## Example usage coming soon
