@@ -15,7 +15,7 @@
 // -Configurator classes and config objects can be subclassed or mixed into to 
 // -Class and inheritance structure follows the same conventions used in core Backbone modules EXCEPT
 // for the wrapped config objects which follow more of a CSS type of property application from more general 
-// to more specific
+// to more specific.
 
 Backbone.Config = (function (Backbone, _, $) {
     "use strict";
