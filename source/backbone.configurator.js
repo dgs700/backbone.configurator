@@ -4,7 +4,7 @@
 
 // @name: Configurator
 //
-// @tagline: Configurator for Backbone Apps- models, views and routers
+// @tagline: Configurator for Backbone Apps- models, views and routers 
 //
 // @description:
 // Experimental code
